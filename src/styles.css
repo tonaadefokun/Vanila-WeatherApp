@@ -1,13 +1,7 @@
 body {
   font-family: Arial, sans-serif;
 }
-.weather-app {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  border: 1px solid #dadde1;
-  border-radius: 5px;
-}
+
 h1 {
   color: rgb(32, 33, 36);
   font-size: 24px;
@@ -19,6 +13,12 @@ ul {
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
+a :hover {
+  text-decoration: solid;
+}
 
 li {
   list-style: none;
@@ -28,4 +28,33 @@ li {
   font-size: 16px;
   font-weight: 100;
   line-height: 22px;
+}
+
+.wrapper {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.weather-app {
+  padding: 20px;
+  border: 1px solid #dadde1;
+  border-radius: 5px;
+}
+.overview {
+  margin-bottom: 20px;
+}
+
+.weathertemp img {
+  margin-right: 0px;
+}
+.weathertemp strong {
+  color: rgb(33, 33, 33);
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 200;
+}
+.weathertemp .units {
+  position: relative;
+  font-size: 16px;
+  bottom: 35px;
 }
