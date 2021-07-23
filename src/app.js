@@ -40,7 +40,7 @@ function displayTemperature(response) {
     response.data.dt * 1000
   );
 }
-let city = "New York";
+let city = "Toronto";
 let apiKey = "5d28e41830862bc850144acfa82e7516";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 console.log(apiUrl);
