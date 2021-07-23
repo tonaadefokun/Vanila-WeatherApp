@@ -23,13 +23,6 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 function displayTemperature(response) {
-  console.log(response.data.main.temp);
-  console.log(response.data.name);
-  console.log(response.data.weather[0].description);
-  console.log(response.data.main.humidity);
-  console.log(response.data.wind.speed);
-  console.log(response.data.dt);
-
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#innerTemp").innerHTML = Math.round(
     response.data.main.temp
