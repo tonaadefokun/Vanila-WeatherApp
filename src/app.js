@@ -36,11 +36,13 @@ function displayTemperature(response) {
     "#windSpeed"
   ).innerHTML = `Wind: ${response.data.wind.speed}Km/h`;
 
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  document.querySelector("#date").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
 }
+let city = "Lagos";
 let apiKey = "5d28e41830862bc850144acfa82e7516";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lagos&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 console.log(apiUrl);
 
 axios.get(apiUrl).then(displayTemperature);
