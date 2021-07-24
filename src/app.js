@@ -27,6 +27,7 @@ function displayTemperature(response) {
   document.querySelector("#innerTemp").innerHTML = Math.round(
     response.data.main.temp
   );
+  console.log(response.data);
   document.querySelector("#desc").innerHTML =
     response.data.weather[0].description;
   document.querySelector(
@@ -81,10 +82,7 @@ search("Ilesa");
 document.querySelector("#formInput").addEventListener("submit", handleCity);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
-console.log(fahrenheit);
 fahrenheit.addEventListener("click", showFahrenheitTemp);
 
 let celcius = document.querySelector("#celcius-link");
-console.log(celcius);
-
 celcius.addEventListener("click", showCelciusTemp);
