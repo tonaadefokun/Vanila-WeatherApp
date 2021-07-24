@@ -59,3 +59,7 @@ li {
   font-size: 16px;
   bottom: 12px;
 }
+.weathertemp .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}

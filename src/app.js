@@ -46,6 +46,8 @@ function displayTemperature(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
+
+  celciusTemperature = response.data.main.temp;
 }
 function search(city) {
   let apiKey = "5d28e41830862bc850144acfa82e7516";
@@ -57,5 +59,32 @@ function handleCity(event) {
   let searchELement = document.querySelector("#searchInput");
   search(searchELement.value);
 }
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#innerTemp");
+  //remove the active class from the celcius link
+  celcius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
+  tempElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+function showCelciusTemp(event) {
+  event.preventDefault();
+  celcius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  let tempElement = document.querySelector("#innerTemp");
+  tempElement.innerHTML = Math.round(celciusTemperature);
+}
+let celciusTemperature = null;
+
 search("Ilesa");
 document.querySelector("#formInput").addEventListener("submit", handleCity);
+
+let fahrenheit = document.querySelector("#fahrenheit-link");
+console.log(fahrenheit);
+fahrenheit.addEventListener("click", showFahrenheitTemp);
+
+let celcius = document.querySelector("#celcius-link");
+console.log(celcius);
+
+celcius.addEventListener("click", showCelciusTemp);
