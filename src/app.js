@@ -47,10 +47,15 @@ function displayTemperature(response) {
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
 }
-let city = "Toronto";
-let apiKey = "5d28e41830862bc850144acfa82e7516";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayTemperature);
-
-let formElement = document.querySelector("#searchInput");
-console.log(formElement);
+function search(city) {
+  let apiKey = "5d28e41830862bc850144acfa82e7516";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+function handleCity(event) {
+  event.preventDefault();
+  let searchELement = document.querySelector("#searchInput");
+  search(searchELement.value);
+}
+search("Ilesa");
+document.querySelector("#formInput").addEventListener("submit", handleCity);
