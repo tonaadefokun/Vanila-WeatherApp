@@ -23,7 +23,9 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 function displayTemperature(response) {
-  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector(
+    "#city"
+  ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   document.querySelector("#innerTemp").innerHTML = Math.round(
     response.data.main.temp
   );
