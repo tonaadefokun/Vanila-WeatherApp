@@ -39,6 +39,13 @@ function displayTemperature(response) {
   document.querySelector("#date").innerHTML = formatDate(
     response.data.dt * 1000
   );
+  let iconApi = response.data.weather[0].icon;
+  document
+    .querySelector("#icon")
+    .setAttribute("src", `http://openweathermap.org/img/wn/${iconApi}@2x.png`);
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", response.data.weather[0].description);
 }
 let city = "Toronto";
 let apiKey = "5d28e41830862bc850144acfa82e7516";
