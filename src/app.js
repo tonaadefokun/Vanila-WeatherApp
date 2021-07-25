@@ -35,9 +35,9 @@ function displayTemperature(response) {
   document.querySelector(
     "#humidity"
   ).innerHTML = `Humidity: ${response.data.main.humidity}%`;
-  document.querySelector(
-    "#windSpeed"
-  ).innerHTML = `Wind: ${response.data.wind.speed}Km/h`;
+  document.querySelector("#windSpeed").innerHTML = `Wind: ${Math.round(
+    response.data.wind.speed
+  )}Km/h`;
 
   document.querySelector("#date").innerHTML = formatDate(
     response.data.dt * 1000
