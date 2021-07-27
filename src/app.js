@@ -22,6 +22,36 @@ function formatDate(timestamp) {
 
   return `${day} ${hours}:${minutes}`;
 }
+
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+
+  let forcastHTML = `<div class="row">`;
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `  
+            <div class="col-2">
+              <div class="weather-forcast-date">${day}</div>
+              <img
+                src="http://openweathermap.org/img/wn/04d@2x.png"
+                alt=""
+                width="42"
+              />
+              <div class="weather-forcast-dates">
+                <span class="weather-forcast-max">18&deg </span
+                ><span class="weather-forcast-min">12&deg</span>
+              </div>
+            </div>
+          `;
+  });
+
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
+
 function displayTemperature(response) {
   document.querySelector(
     "#city"
@@ -80,7 +110,6 @@ function showCelciusTemp(event) {
 }
 let celciusTemperature = null;
 
-search("Ilesa");
 document.querySelector("#formInput").addEventListener("submit", handleCity);
 
 let fahrenheit = document.querySelector("#fahrenheit-link");
@@ -88,3 +117,7 @@ fahrenheit.addEventListener("click", showFahrenheitTemp);
 
 let celcius = document.querySelector("#celcius-link");
 celcius.addEventListener("click", showCelciusTemp);
+
+search("Ilesa");
+
+displayForcast();
