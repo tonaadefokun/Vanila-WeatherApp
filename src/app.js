@@ -23,43 +23,71 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForcast() {
-  let forcastElement = document.querySelector("#forcast");
+function formatDayForecast(timestampForecast) {
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let dateForecast = new Date(timestampForecast * 1000);
+  let day = days[dateForecast.getDay()];
 
-  let forcastHTML = `<div class="row">`;
+  return day;
+}
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `  
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `  
             <div class="col-2">
-              <div class="weather-forcast-date">${day}</div>
+              <div class="weather-forecast-date">${formatDayForecast(
+                forecastDay.dt
+              )}</div>
               <img
-                src="http://openweathermap.org/img/wn/04d@2x.png"
+                src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
                 alt=""
                 width="42"
               />
-              <div class="weather-forcast-dates">
-                <span class="weather-forcast-max">18&deg </span
-                ><span class="weather-forcast-min">12&deg</span>
+              <div class="weather-forecast-dates">
+                <span class="weather-forecast-max">${Math.round(
+                  forecastDay.temp.max
+                )}&deg </span
+                ><span class="weather-forecast-min">${Math.round(
+                  forecastDay.temp.min
+                )}&deg</span>
               </div>
             </div>
           `;
+    }
   });
 
-  forcastHTML = forcastHTML + `</div>`;
-  forcastElement.innerHTML = forcastHTML;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates.lon);
+  let apiKey = "5d28e41830862bc850144acfa82e7516";
+
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayTemperature(response) {
+  console.log(response.data);
   document.querySelector(
     "#city"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   document.querySelector("#innerTemp").innerHTML = Math.round(
     response.data.main.temp
   );
-  console.log(response.data);
   document.querySelector("#desc").innerHTML =
     response.data.weather[0].description;
   document.querySelector(
@@ -81,6 +109,8 @@ function displayTemperature(response) {
     .setAttribute("alt", response.data.weather[0].description);
 
   celciusTemperature = response.data.main.temp;
+
+  getForecast(response.data.coord);
 }
 function search(city) {
   let apiKey = "5d28e41830862bc850144acfa82e7516";
@@ -119,5 +149,3 @@ let celcius = document.querySelector("#celcius-link");
 celcius.addEventListener("click", showCelciusTemp);
 
 search("Ilesa");
-
-displayForcast();
